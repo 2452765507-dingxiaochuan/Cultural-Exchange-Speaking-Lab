@@ -1,0 +1,11 @@
+{
+  "name": "互联网英文文化交流平台",
+  "short_name": "英文文化交流",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f8fc",
+  "theme_color": "#0b3b76",
+  "description": "双语接待、品牌讲述与行业导览英语学习平台。"
+}

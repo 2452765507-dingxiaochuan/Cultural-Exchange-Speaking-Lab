@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#0b3b76">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="互联网英文文化交流平台">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>互联网英文文化交流平台</title>
+<link rel="stylesheet" href="styles.css">
+<!-- 本地镜像已移除第三方统计脚本；离线打开不依赖外部 CDN。 --></head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">互联网文化交流<br>英语学习平台
+      <small>双语接待 · 品牌讲述 · 行业导览</small>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="modlist" id="modlist"></div>
+    <div style="margin-top:18px;font-size:11.5px;color:#6f8cb8;line-height:1.6">
+      进度仅存于本浏览器。<br>语音朗读用浏览器原生 TTS，无需音频文件。
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <h1 id="topTitle">总览</h1>
+      <span class="sub" id="topSub">理解行业，练好表达</span>
+    </div>
+    <div class="content" id="view"></div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<div id="lookupModal" class="lookup-modal" aria-live="polite"></div>
+
+<script>window.__GITHUB_PAGES_BUILD__ = true;</script>
+<script src="data.js"></script>
+<script src="phrase_packs.js"></script>
+<script src="phrase_bank.js"></script>
+<script src="role_turns.js"></script>
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js', { scope: './' });
+    });
+  }
+</script>
+</body>
+</html>

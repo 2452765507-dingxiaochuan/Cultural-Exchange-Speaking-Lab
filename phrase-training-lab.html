@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>短语卡片训练</title>
+<style>
+:root{--ink:#172033;--muted:#5d687d;--line:#d9e0eb;--bg:#f5f7fb;--blue:#185fa5;--bluebg:#e6f1fb;--green:#0f6e56;--greenbg:#e1f5ee;--amber:#854f0b;--amberbg:#faeeda;--red:#a32d2d;--redbg:#fcebeb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}.page{max-width:780px;margin:auto;padding:28px 18px 64px}.hero,.trainer,.note{background:#fff;border:1px solid var(--line);border-radius:16px}.hero{padding:24px 26px}.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--blue)}h1{font-size:27px;line-height:1.25;margin:5px 0 8px}h2{font-size:19px;margin:0}.muted{color:var(--muted);font-size:14px;margin:0}.rule{margin-top:15px;padding:12px 14px;border-left:3px solid var(--blue);background:var(--bluebg);font-size:14px}.deck-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 14px}.tab{border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);padding:7px 12px;font-size:13px;cursor:pointer}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}.trainer{padding:26px}.status{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:15px}.status .group{font-size:13px;color:var(--blue);font-weight:600}.progress{font-size:13px;color:var(--muted)}.bar{height:6px;background:#edf1f6;border-radius:9px;margin:16px 0 24px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .25s}.card{min-height:280px;border:1px solid var(--line);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff}.card .label{font-size:13px;color:var(--muted);margin-bottom:12px}.zh{font-size:28px;font-weight:600;line-height:1.4}.en{display:none;margin-top:22px;font-size:26px;color:var(--blue);font-weight:600;line-height:1.38}.en.show{display:block}.hint{display:none;margin-top:13px;color:var(--muted);font-size:14px}.hint.show{display:block}.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid var(--blue);background:var(--blue);color:#fff;border-radius:10px;padding:10px 14px;font-size:14px;cursor:pointer}.btn:hover{filter:brightness(.96)}.btn.ghost{background:#fff;color:var(--blue)}.btn.red{border-color:var(--red);background:#fff;color:var(--red)}.btn.amber{border-color:var(--amber);background:#fff;color:var(--amber)}.btn.green{border-color:var(--green);background:var(--green);color:#fff}.rate{display:none;margin-top:18px}.rate.show{display:flex}.feedback{min-height:24px;text-align:center;font-size:14px;margin-top:16px;color:var(--muted)}.complete{display:none;text-align:center;padding:32px 12px}.complete.show{display:block}.complete .big{font-size:25px;font-weight:600}.complete p{color:var(--muted);font-size:14px}.stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:17px 0}.stat{border-radius:10px;padding:8px 10px;font-size:13px}.stat b{font-size:17px}.s1{background:var(--greenbg);color:#04342c}.s2{background:var(--amberbg);color:#633806}.s3{background:var(--redbg);color:#791f1f}.note{padding:18px 20px;margin-top:16px}.note h2{font-size:17px}.note ul{padding-left:20px;margin:9px 0 0;color:var(--muted);font-size:14px}.smallacts{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.linkbtn{border:0;background:none;color:var(--blue);font-size:13px;cursor:pointer;padding:0}@media(max-width:560px){.page{padding:16px 12px 44px}.hero,.trainer{padding:20px}.zh{font-size:24px}.en{font-size:22px}.card{min-height:250px;padding:22px 14px}.status{align-items:flex-start;flex-direction:column;gap:3px}}
+</style>
+</head>
+<body>
+<main class="page">
+<section class="hero">
+<div class="eyebrow">互联网英文文化交流平台 · 训练方式确认</div>
+<h1>短语卡片训练</h1>
+<p class="muted">不猜情境，不做造句任务。一次只学一个：<b>中文短语 → 英文短语</b>。像背单词一样，一个一个过，忘了就回来再过。</p>
+<div class="rule"><b>操作：</b>先看中文，在脑中回忆英文；点“显示英文”核对；再选择 <b>不认识 / 模糊 / 记住</b>。不认识和模糊的短语会自动回到队列，直到你记住。</div>
+</section>
+
+<nav class="deck-tabs" aria-label="短语卡片分组">
+<button class="tab active" data-deck="all">全部 12 个</button>
+<button class="tab" data-deck="analysis">业务分析 4 个</button>
+<button class="tab" data-deck="cost">成本与商业模式 4 个</button>
+<button class="tab" data-deck="delivery">企业服务与交付 4 个</button>
+</nav>
+
+<section class="trainer">
+<div id="learning">
+<div class="status"><span id="group" class="group"></span><span id="progress" class="progress"></span></div>
+<div class="bar"><i id="bar"></i></div>
+<div class="card">
+<div class="label">中文短语</div>
+<div id="zh" class="zh"></div>
+<div id="en" class="en"></div>
+<div id="hint" class="hint"></div>
+</div>
+<div id="revealActs" class="acts"><button id="reveal" class="btn">显示英文</button></div>
+<div id="rate" class="acts rate">
+<button class="btn red" data-rate="again">不认识</button>
+<button class="btn amber" data-rate="fuzzy">模糊</button>
+<button class="btn green" data-rate="good">记住</button>
+</div>
+<div id="feedback" class="feedback">先在脑中说出英文，再点“显示英文”。</div>
+</div>
+<div id="complete" class="complete">
+<div class="big">本轮短语已过完</div>
+<p>这只是当前一轮的“记住”。真正稳固要在明天、3 天后、7 天后再从中文回忆英文。</p>
+<div id="stats" class="stats"></div>
+<div class="acts"><button id="restart" class="btn">重新练这一组</button><button id="switchDeck" class="btn ghost">换一组短语</button></div>
+</div>
+<div class="smallacts"><button id="reset" class="linkbtn">重置本页练习记录</button><span class="muted" style="font-size:12px">本实验页会在浏览器中保存当前进度</span></div>
+</section>
+
+<section class="note">
+<h2>未来放进原网站的方式</h2>
+<ul>
+<li>每节课的“理解”阶段会新增<b>本节短语卡</b>，数量按课程实际内容定，不强行限定 5 个或 10 个。</li>
+<li>三击单词或短语后，可看到中文释义、相关搭配，并选择“加入本节短语卡”。</li>
+<li>加入长期路径的短语，会进入与单词类似的间隔复习：先中文回忆英文，再按“不认识 / 模糊 / 记住”安排下次出现。</li>
+</ul>
+</section>
+</main>
+<script>
+const cards=[
+ {deck:'analysis',group:'业务分析',zh:'明确的业务问题',en:'a clear business problem',hint:'不是泛泛谈“需求”，而是能被界定、分析和解决的问题。'},
+ {deck:'analysis',group:'业务分析',zh:'现有工作流',en:'the current workflow',hint:'指事情目前是怎样一步一步完成的流程。'},
+ {deck:'analysis',group:'业务分析',zh:'成功衡量指标',en:'success measures',hint:'衡量方案是否真正有效的指标。'},
+ {deck:'analysis',group:'业务分析',zh:'一长串产品清单',en:'a long product list',hint:'强调“产品很多”，但不一定解决客户真正的问题。'},
+ {deck:'cost',group:'成本与商业模式',zh:'软件授权',en:'software licensing',hint:'获得使用某项软件的授权或许可。'},
+ {deck:'cost',group:'成本与商业模式',zh:'前期硬件投入',en:'upfront hardware cost',hint:'一开始购买服务器、设备等硬件的成本。'},
+ {deck:'cost',group:'成本与商业模式',zh:'运营开支',en:'operating expenses',hint:'系统运行中持续发生的开支，常简称 OPEX。'},
+ {deck:'cost',group:'成本与商业模式',zh:'总拥有成本',en:'total cost of ownership',hint:'从采购、部署、运行到维护的全部成本，常简称 TCO。'},
+ {deck:'delivery',group:'企业服务与交付',zh:'创造价值',en:'create value',hint:'为客户带来可被感受到或衡量的实际价值。'},
+ {deck:'delivery',group:'企业服务与交付',zh:'企业服务',en:'enterprise services',hint:'面向企业客户而非个人消费者提供的服务。'},
+ {deck:'delivery',group:'企业服务与交付',zh:'解决方案设计',en:'solution design',hint:'根据具体问题、约束和目标规划解决方案。'},
+ {deck:'delivery',group:'企业服务与交付',zh:'交付技术方案',en:'deliver a technical solution',hint:'把设计、实施与服务真正落地给客户。'}
+];
+let deck='all',queue=[],seen=0,stats={good:0,fuzzy:0,again:0};
+const $=id=>document.getElementById(id);
+function pool(){return cards.filter(c=>deck==='all'||c.deck===deck)}
+function key(){return 'phrase_card_lab_v2_'+deck}
+function save(){localStorage.setItem(key(),JSON.stringify({queue:queue,seen:seen,stats:stats}))}
+function load(){let saved;try{saved=JSON.parse(localStorage.getItem(key())||'null')}catch(e){};if(saved&&Array.isArray(saved.queue)){queue=saved.queue;seen=saved.seen||0;stats=saved.stats||{good:0,fuzzy:0,again:0}}else{queue=pool().map(c=>c.en);seen=0;stats={good:0,fuzzy:0,again:0}}}
+function current(){let en=queue[0];return cards.find(c=>c.en===en)}
+function render(){let c=current();$('learning').style.display=c?'':'none';$('complete').classList.toggle('show',!c);if(!c){$('stats').innerHTML=`<span class="stat s1">记住 <b>${stats.good}</b></span><span class="stat s2">模糊 <b>${stats.fuzzy}</b></span><span class="stat s3">不认识 <b>${stats.again}</b></span>`;return}$('group').textContent=c.group;$('progress').textContent=`当前剩余 ${queue.length} / 本轮 ${pool().length} 个`;$('bar').style.width=Math.min(100,Math.round(seen/(seen+queue.length)*100))+'%';$('zh').textContent=c.zh;$('en').textContent=c.en;$('hint').textContent=c.hint;$('en').classList.remove('show');$('hint').classList.remove('show');$('rate').classList.remove('show');$('revealActs').style.display='flex';$('feedback').textContent='先在脑中说出英文，再点“显示英文”。'}
+function reveal(){let c=current();$('en').classList.add('show');$('hint').classList.add('show');$('rate').classList.add('show');$('revealActs').style.display='none';$('feedback').textContent='核对后如实选择。忘记是正常的，系统会让它再次出现。';if(window.speechSynthesis){window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(c.en);u.lang='en-US';u.rate=.9;window.speechSynthesis.speak(u)}}
+function rate(type){if(!$('en').classList.contains('show'))return;let c=queue.shift();stats[type]++;seen++;if(type==='again'){queue.splice(Math.min(2,queue.length),0,c);$('feedback').textContent='已放回较近的位置，过 2 张左右会再见到它。'}else if(type==='fuzzy'){queue.splice(Math.min(5,queue.length),0,c);$('feedback').textContent='已放回稍后的位置，过几张再检查一次。'}else{$('feedback').textContent='已完成本轮。之后它应进入明天和后续的间隔复习。'}save();setTimeout(render,250)}
+function switchDeck(next){deck=next;load();render();document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.deck===deck))}
+$('reveal').addEventListener('click',reveal);document.addEventListener('click',e=>{let r=e.target.closest('[data-rate]');if(r)rate(r.dataset.rate);let t=e.target.closest('[data-deck]');if(t)switchDeck(t.dataset.deck)});$('restart').addEventListener('click',()=>{localStorage.removeItem(key());load();render()});$('switchDeck').addEventListener('click',()=>switchDeck(deck==='all'?'analysis':'all'));$('reset').addEventListener('click',()=>{if(confirm('确定重置当前分组的练习记录吗？')){localStorage.removeItem(key());load();render()}});load();render();
+</script>
+</body>
+</html>
